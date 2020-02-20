@@ -32,19 +32,6 @@ Style/ClassAndModuleChildren:
     - 'app/channels/application_cable/connection.rb'
     - 'config/application.rb'
 
-# Offense count: 7
-Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'app/controllers/api/twitter/users_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/mailers/application_mailer.rb'
-    - 'app/models/application_record.rb'
-    - 'config/application.rb'
-    - 'db/migrate/20200220030009_create_twitter_users.rb'
-    - 'db/migrate/20200220035900_create_twitter_relationships.rb'
-
 # Offense count: 2
 Style/MixinUsage:
   Exclude:

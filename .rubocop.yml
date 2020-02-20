@@ -13,3 +13,5 @@ Layout/LineLength:
   Enabled: true
   AutoCorrect: true
   Max: 120
+Style/Documentation:
+  Enabled: false
