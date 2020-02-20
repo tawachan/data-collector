@@ -44,5 +44,7 @@ module TawaMeApi
     end
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.autoload_paths += %W[#{config.root}/app/helpers]
   end
 end

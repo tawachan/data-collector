@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :twitter do
       resources :users, only: [:index]
+      post '/users/execute', to: 'users#execute'
     end
   end
 

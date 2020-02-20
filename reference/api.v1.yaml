@@ -5,26 +5,21 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/twitter/users:
-    get:
-      summary: Twitterのユーザーデータ
-      tags: []
+  /api/twitter/users/execute:
+    post:
+      summary: execute job fetching user data from Twitter
+      operationId: post-api-twitter-users
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  screen_name:
-                    type: string
-                  unique_id:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
+      description: twitterからユーザー情報取得ジョブを実行
+  /api/twitter/users:
+    get:
+      summary: fetch users
       operationId: get-api-twitter-users
+      responses:
+        '200':
+          description: OK
+      description: ユーザー一覧を取得
 components:
   schemas: {}

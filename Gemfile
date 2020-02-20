@@ -50,3 +50,5 @@ gem 'sidekiq'
 
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
+
+gem 'twitter'
