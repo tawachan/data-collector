@@ -42,5 +42,7 @@ module TawaMeApi
                        controller_specs: false,
                        request_spec: false
     end
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
