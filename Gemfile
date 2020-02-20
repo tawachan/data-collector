@@ -31,12 +31,13 @@ group :development, :test do
 end
 
 group :development do
+  gem 'foreman'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'pre-commit'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rubocop-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'foreman'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -46,5 +47,6 @@ gem 'committee'
 gem 'committee-rails'
 
 gem 'sidekiq'
+
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
