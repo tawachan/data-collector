@@ -9,7 +9,22 @@ paths:
     get:
       summary: Twitterのユーザーデータ
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  screen_name:
+                    type: string
+                  unique_id:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
       operationId: get-api-twitter-users
 components:
   schemas: {}
