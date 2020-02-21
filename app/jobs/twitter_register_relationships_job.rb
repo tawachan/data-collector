@@ -70,7 +70,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
     slack_client.info('ジョブが終了されました', '正常に終わってよかった', user_count, relationship_count, me)
   rescue Twitter::Error::TooManyRequests => e
     logger.error(e)
-    slack_client.error('ジョブが異常終了しました', "15分後に再度実行します。（#{e.message}）")
+    slack_client.error('ジョブが異常終了しました', "15分後に再度実行します。（#{e.message}）", me)
     TwitterRegisterRelationshipsJob.set(wait: 15.minutes).perform_later(twitter_screen_name)
   end
 end

@@ -34,10 +34,13 @@ class SlackClient
     }]
   end
 
-  def error(title, message)
+  def error(title, message, user = nil)
     @client.post "【#{Rails.env.production? ? '本番' : '開発'}】Twitter Collector", attachments: [{
       title: title,
       title_link: 'https://tawa-me-api.herokuapp.com/sidekiq',
+      author_name: user.screen_name,
+      author_link: user.url,
+      author_icon: user.profile_image_url,
       text: message,
       color: '#cc2f2f'
     }]
