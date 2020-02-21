@@ -51,7 +51,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
 
     ActiveRecord::Base.transaction do
       TwitterRelationship.where(followed_id: me.id).each(&:destroy!)
-      twitter_follower_ids.each do |twitter_id|
+      twitter_follower_ids.each_with_index do |twitter_id, index|
         u = TwitterUser.find_by(twitter_id: twitter_id)
         next if u.nil?
 
