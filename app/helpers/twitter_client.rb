@@ -5,7 +5,7 @@ require 'twitter'
 class TwitterClient
   def initialize
     @client = Twitter::REST::Client.new do |config|
-      key = Rails.env.production? ? :production : :development
+      key = !Rails.env.production? ? :production : :development
       config.consumer_key        = Rails.application.credentials[key][:twitter_api_key]
       config.consumer_secret     = Rails.application.credentials[key][:twitter_secret_key]
       config.access_token        = Rails.application.credentials[key][:twitter_access_token]
