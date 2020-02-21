@@ -38,8 +38,8 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
         next if u.nil?
 
         if layer_count.positive?
-          TwitterRegisterRelationshipsJob.set(wait: 5.minutes * (index / 10).floor).perform_later(u.screen_name,
-                                                                                                  layer_count - 1)
+          TwitterRegisterRelationshipsJob.set(wait: 15.minutes * (index / 10).floor).perform_later(u.screen_name,
+                                                                                                   layer_count - 1)
         end
 
         next if TwitterRelationship.exists?(follower_id: me.id, followed_id: u.id)
@@ -69,8 +69,8 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
         next if u.nil?
 
         if layer_count.positive?
-          TwitterRegisterRelationshipsJob.set(wait: 5.minutes * (index / 10).floor).perform_later(u.screen_name,
-                                                                                                  layer_count - 1)
+          TwitterRegisterRelationshipsJob.set(wait: 15.minutes * (index / 10).floor).perform_later(u.screen_name,
+                                                                                                   layer_count - 1)
         end
         next if TwitterRelationship.exists?(follower_id: u.id, followed_id: me.id)
 
