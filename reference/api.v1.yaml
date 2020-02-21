@@ -3,7 +3,9 @@ info:
   title: api
   version: '1.0'
 servers:
+  - url: 'https://tawa-me-api.herokuapp.com'
   - url: 'http://localhost:3000'
+    description: ''
 paths:
   /api/twitter/users/execute:
     post:
