@@ -20,7 +20,7 @@ class TwitterClient
   # 1度に最大5000件
   def fetch_friend_ids_of(screen_name, cursor = nil)
     ids ||= []
-    data = @client.friend_ids(screen_name, count: 4000, cursor: cursor).attrs
+    data = @client.friend_ids(screen_name, count: 5000, cursor: cursor).attrs
     ids = ids.concat(data[:ids])
     fetch_friend_ids_of(screen_name, data[:next_cursor]) if data[:next_cursor].zero?
     ids
@@ -29,7 +29,7 @@ class TwitterClient
   # 1度に最大5000件
   def fetch_follower_ids_of(screen_name, cursor = nil)
     ids ||= []
-    data = @client.follower_ids(screen_name, count: 4000, cursor: cursor).attrs
+    data = @client.follower_ids(screen_name, count: 5000, cursor: cursor).attrs
     ids = ids.concat(data[:ids])
     fetch_follower_ids_of(screen_name, data[:next_cursor]) unless data[:next_cursor].zero?
     ids
