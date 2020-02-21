@@ -81,6 +81,10 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
     logger.error(e)
     slack_client.error('ジョブが異常終了しました', "15分後に再度実行します。（#{e.message}）", me)
     TwitterRegisterRelationshipsJob.set(wait: 15.minutes).perform_later(twitter_screen_name, layer_count)
+  rescue StandardError => e
+    logger.error(e)
+    slack_client.error('ジョブが異常終了しました', "再度実行します。（#{e.message}）", me)
+    raise e
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 end
