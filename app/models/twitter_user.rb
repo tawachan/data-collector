@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class TwitterUser < ApplicationRecord
-  has_many :follower_relationships, foreign_key: 'follower_id', class_name: 'TwitterRelationship', dependent: :destroy
-  has_many :followings, through: :follower_relationships, source: :follower
-  has_many :followed_relationships, foreign_key: 'followed_id', class_name: 'TwitterRelationship', dependent: :destroy
-  has_many :followers, through: :followed_relationships, source: :followed
+  has_many :follower_relationships, foreign_key: 'follower_id', class_name: 'TwitterRelationship',
+                                    dependent: :destroy, inverse_of: :followed_relationships
+  has_many :followings, through: :follower_relationships, source: :followed
+  has_many :followed_relationships, foreign_key: 'followed_id', class_name: 'TwitterRelationship',
+                                    dependent: :destroy, inverse_of: :follower_relationships
+  has_many :followers, through: :followed_relationships, source: :follower
 
   validates :twitter_id, uniqueness: true
 
