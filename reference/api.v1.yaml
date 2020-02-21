@@ -7,14 +7,19 @@ servers:
   - url: 'http://localhost:3000'
     description: ''
 paths:
-  /api/twitter/users/execute:
+  /api/twitter/jobs:
     post:
-      summary: execute job fetching user data from Twitter
+      summary: execute job
       operationId: post-api-twitter-users
       responses:
         '200':
           description: OK
-      description: twitterからユーザー情報取得ジョブを実行
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: ''
       requestBody:
         content:
           application/json:
@@ -25,13 +30,32 @@ paths:
                   type: string
                   example: tawachandesu
         description: ''
-  /api/twitter/users:
+    parameters: []
     get:
-      summary: fetch users
-      operationId: get-api-twitter-users
+      summary: fetch jobs data
+      operationId: get-api-twitter-jobs
       responses:
         '200':
           description: OK
-      description: ユーザー一覧を取得
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      parameters: []
+  /api/twitter/jobs/reset:
+    get:
+      summary: ''
+      operationId: get-api-twitter-jobs-reset
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
 components:
   schemas: {}
+  securitySchemes: {}

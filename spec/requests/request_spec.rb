@@ -6,7 +6,7 @@ include RoutingTestHelper
 include Committee::Rails::Test::Methods
 
 RSpec.describe 'すべてのエンドポイントを確認', type: :request do
-  IGNORE_PATHS = [].freeze
+  IGNORE_PATHS = %w[apidoc sidekiq].freeze
 
   before do
     # seed等を実行して前提データを作る

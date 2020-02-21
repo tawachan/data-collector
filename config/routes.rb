@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :twitter do
-      resources :users, only: [:index]
-      post '/users/execute', to: 'users#execute'
+      resources :jobs, only: %i[index create]
+      get 'jobs/reset', to: 'jobs#reset'
     end
   end
 

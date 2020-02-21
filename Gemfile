@@ -51,4 +51,5 @@ gem 'sidekiq'
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
 
+gem 'slack-incoming-webhooks'
 gem 'twitter'
