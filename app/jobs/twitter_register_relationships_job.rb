@@ -4,7 +4,8 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
   queue_as :default
 
   # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-  def perform(twitter_screen_name, execute_next = false)
+  # layer_count の数だけ、再帰的にデータを取得していく
+  def perform(twitter_screen_name, layer_count = 0)
     twitter_client = TwitterClient.new
     slack_client = SlackClient.new
 
@@ -33,7 +34,10 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
         u = TwitterUser.find_by(twitter_id: twitter_id)
         next if u.nil?
 
-        TwitterRegisterRelationshipsJob.set(wait: 15.minutes * index).perform_later(u.screen_name) if execute_next
+        if layer_count.positive?
+          TwitterRegisterRelationshipsJob.set(wait: 15.minutes * index).perform_later(u.screen_name,
+                                                                                      layer_count - 1)
+        end
 
         next if TwitterRelationship.exists?(follower_id: me.id, followed_id: u.id)
 
@@ -59,7 +63,10 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
         u = TwitterUser.find_by(twitter_id: twitter_id)
         next if u.nil?
 
-        TwitterRegisterRelationshipsJob.set(wait: 15.minutes * index).perform_later(u.screen_name) if execute_next
+        if layer_count.positive?
+          TwitterRegisterRelationshipsJob.set(wait: 15.minutes * index).perform_later(u.screen_name,
+                                                                                      layer_count - 1)
+        end
         next if TwitterRelationship.exists?(follower_id: u.id, followed_id: me.id)
 
         TwitterRelationship.create!(follower_id: u.id, followed_id: me.id)
@@ -72,7 +79,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
   rescue Twitter::Error::TooManyRequests => e
     logger.error(e)
     slack_client.error('ジョブが異常終了しました', "15分後に再度実行します。（#{e.message}）", me)
-    TwitterRegisterRelationshipsJob.set(wait: 15.minutes).perform_later(twitter_screen_name, execute_next)
+    TwitterRegisterRelationshipsJob.set(wait: 15.minutes).perform_later(twitter_screen_name, layer_count)
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 end

@@ -29,6 +29,10 @@ paths:
                 screen_name:
                   type: string
                   example: tawachandesu
+                layer_count:
+                  type:
+                    - string
+                    - integer
         description: ''
     parameters: []
     get:
