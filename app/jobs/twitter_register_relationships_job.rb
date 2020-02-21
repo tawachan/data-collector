@@ -5,9 +5,10 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
 
   # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   # layer_count の数だけ、再帰的にデータを取得していく
-  def perform(twitter_screen_name, layer_count = 0)
+  def perform(twitter_screen_name, layer_count = '0')
     twitter_client = TwitterClient.new
     slack_client = SlackClient.new
+    layer_count = layer_count.to_i
 
     slack_client.info('ジョブが開始されました', "@#{twitter_screen_name}の情報取得が開始されました")
 
