@@ -13,11 +13,11 @@ class SlackClient
     fields = [
       {
         title: 'フォロー数',
-        value: user.followings.count,
+        value: user&.followings&.count,
         short: true
       }, {
         title: 'フォロワー数',
-        value: user.follwers.count,
+        value: user&.follwers&.count,
         short: true
       }, {
         title: 'ユーザー数合計',
