@@ -25,9 +25,12 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
 
     ActiveRecord::Base.transaction do
       TwitterRelationship.where(follower_id: me.id).each(&:destroy!)
-      twitter_friend_ids.each do |twitter_id|
+      twitter_friend_ids.each_with_index do |twitter_id, index|
         u = TwitterUser.find_by(twitter_id: twitter_id)
         next if u.nil?
+
+        TwitterRegisterRelationshipsJob.set(wait: 15.minutes * index).perform_later(u.screen_name)
+
         next if TwitterRelationship.exists?(follower_id: me.id, followed_id: u.id)
 
         TwitterRelationship.create!(follower_id: me.id, followed_id: u.id)
@@ -51,6 +54,8 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
       twitter_follower_ids.each do |twitter_id|
         u = TwitterUser.find_by(twitter_id: twitter_id)
         next if u.nil?
+
+        TwitterRegisterRelationshipsJob.set(wait: 15.minutes * index).perform_later(u.screen_name)
         next if TwitterRelationship.exists?(follower_id: u.id, followed_id: me.id)
 
         TwitterRelationship.create!(follower_id: u.id, followed_id: me.id)
