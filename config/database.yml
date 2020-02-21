@@ -25,3 +25,4 @@ test:
 production:
   <<: *default
   database: tawa-production
+  url: <%%= ENV['DATABASE_URL'] %>
