@@ -22,7 +22,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
 
     twitter_target_ids = twitter_friend_ids.reject { |twitter_id| TwitterUser.exists?(twitter_id: twitter_id) }
 
-    twitter_target_ids.each_slice(100) do |ids|
+    twitter_target_ids.each_slice(90) do |ids|
       users = twitter_client.fetch_users(ids)
       users.each do |user|
         TwitterUser.register_or_update!(user)
@@ -51,7 +51,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
 
     twitter_target_ids = twitter_follower_ids.reject { |twitter_id| TwitterUser.exists?(twitter_id: twitter_id) }
 
-    twitter_target_ids.each_slice(100) do |ids|
+    twitter_target_ids.each_slice(90) do |ids|
       users = twitter_client.fetch_users(ids)
       users.each do |user|
         TwitterUser.register_or_update!(user)
