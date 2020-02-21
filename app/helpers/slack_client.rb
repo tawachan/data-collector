@@ -22,7 +22,7 @@ class SlackClient
       }
     ]
 
-    @client.post "#{Rails.env.production? ? '本番' : '開発'}[Twitter Collector]", attachments: [{
+    @client.post "【#{Rails.env.production? ? '本番' : '開発'}】Twitter Collector", attachments: [{
       title: title,
       title_link: 'https://tawa-me-api.herokuapp.com/sidekiq',
       text: message,
@@ -32,7 +32,7 @@ class SlackClient
   end
 
   def error(title, message)
-    @client.post "#{Rails.env.production? ? '本番' : '開発'}[Twitter Collector]", attachments: [{
+    @client.post "【#{Rails.env.production? ? '本番' : '開発'}】Twitter Collector", attachments: [{
       title: title,
       title_link: 'https://tawa-me-api.herokuapp.com/sidekiq',
       text: message,
