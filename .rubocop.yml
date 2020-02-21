@@ -20,4 +20,7 @@ Rails/HelperInstanceVariable:
 Style/AsciiComments:
   Enabled: false
 Metrics/MethodLength:
-  Enabled: false
+  Max: 100
+Metrics/AbcSize:
+  Max: 100
+  

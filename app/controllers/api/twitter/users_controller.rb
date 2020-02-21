@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-class Api::Twitter::UsersController < ApplicationController
+class Api::Twitter::UsersController < Api::ApplicationController
   def index
     users = TwitterUser.all
     render json: users
   end
 
   def execute
-    client = TwitterClient.new
-    ids = client.fetch_follower_ids_of('tawachandesu')
-    users = client.fetch_users(ids)
-    render json: ids.to_json
-    # render json: TwitterUser.find(1).followings
+    screen_name = params[:screen_name]
+    raise BadRequest, 'screen_name is not defined' if screen_name.nil?
+
+    TwitterRegisterRelationshipsJob.perform_later(screen_name)
+    render_success_response
   end
 end

@@ -17,12 +17,12 @@ class TwitterClient
   end
 
   # 1度に最大5000件
-  def fetch_friend_ids_of(screen_name)
+  def fetch_friend_ids_of(screen_name, cursor = nil)
     ids ||= []
     data = @client.friend_ids(screen_name, count: 5000, cursor: cursor).attrs
     ids = ids.concat(data[:ids])
-    p ids
     fetch_friend_ids_of(screen_name, data[:next_cursor]) if data[:next_cursor].zero?
+    ids
   end
 
   # 1度に最大5000件
@@ -30,13 +30,13 @@ class TwitterClient
     ids ||= []
     data = @client.follower_ids(screen_name, count: 5000, cursor: cursor).attrs
     ids = ids.concat(data[:ids])
-    p ids
-    p "next_cursor#{data[:next_cursor]}"
     fetch_follower_ids_of(screen_name, data[:next_cursor]) unless data[:next_cursor].zero?
+    ids
   end
 
   # 1度に最大100件
+  # それ以上渡してもいい感じに複数回リクエスト飛ばしてくれるらしい
   def fetch_users(user_ids)
-    @client.users(user_id: user_ids.join(','))
+    @client.users(user_ids)
   end
 end
