@@ -30,9 +30,8 @@ paths:
                   type: string
                   example: tawachandesu
                 layer_count:
-                  type:
-                    - string
-                    - integer
+                  type: integer
+                  example: '1'
         description: ''
     parameters: []
     get:
