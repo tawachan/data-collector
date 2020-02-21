@@ -8,7 +8,7 @@ class SlackClient
                                                                                        channel: '#twitter-collection')
   end
 
-  def info(title, message, user_count = nil, relationship_count = nil)
+  def info(title, message, user_count = nil, relationship_count = nil, user = nil)
     fields_hidden = user_count.nil? || relationship_count.nil?
     fields = [
       {
@@ -25,6 +25,9 @@ class SlackClient
     @client.post "【#{Rails.env.production? ? '本番' : '開発'}】Twitter Collector", attachments: [{
       title: title,
       title_link: 'https://tawa-me-api.herokuapp.com/sidekiq',
+      author_name: user.screen_name,
+      author_link: user.url,
+      author_icon: user.profile_image_url,
       text: message,
       color: '#7CD197',
       fields: fields_hidden ? nil : fields
