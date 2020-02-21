@@ -17,7 +17,7 @@ class SlackClient
         short: true
       }, {
         title: 'フォロワー数',
-        value: user&.follwers&.count,
+        value: user&.followers&.count,
         short: true
       }, {
         title: 'ユーザー数合計',
