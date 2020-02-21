@@ -83,8 +83,12 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
     slack_client.info('ジョブが終了されました', '正常に終わってよかった', user_count, relationship_count, me)
   rescue Twitter::Error::TooManyRequests => e
     logger.error(e)
-    slack_client.error('ジョブが異常終了しました', "15分後に再度実行します。（#{e.message}）", me)
-    TwitterRegisterRelationshipsJob.set(wait: 15.minutes).perform_later(twitter_screen_name, layer_count)
+
+    queue_count = Sidekiq::ScheduledSet.new.size
+    time_to_delay = 15 * (queue_count / 10).floor
+
+    slack_client.error('ジョブが異常終了しました', "#{time_to_delay}分後に再度実行します。（#{e.message}）", me)
+    TwitterRegisterRelationshipsJob.set(wait: time_to_delay * 1.minute).perform_later(twitter_screen_name, layer_count)
   rescue StandardError => e
     logger.error(e)
     slack_client.error('ジョブが異常終了しました。再度実行します。', e.backtrace.to_s, me)
