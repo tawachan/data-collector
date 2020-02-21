@@ -46,5 +46,14 @@ module TawaMeApi
     config.active_job.queue_adapter = :sidekiq
 
     config.autoload_paths += %W[#{config.root}/app/helpers]
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: %i[get post options head]
+      end
+    end
   end
 end
