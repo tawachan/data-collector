@@ -12,11 +12,19 @@ class SlackClient
     fields_hidden = user_count.nil? || relationship_count.nil?
     fields = [
       {
-        title: 'ユーザー数',
+        title: 'フォロー数',
+        value: user.followings.count,
+        short: true
+      }, {
+        title: 'フォロワー数',
+        value: user.follwers.count,
+        short: true
+      }, {
+        title: 'ユーザー数合計',
         value: user_count,
         short: true
       }, {
-        title: 'フォロー／フォロワー関係',
+        title: 'FF関係合計',
         value: relationship_count,
         short: true
       }
