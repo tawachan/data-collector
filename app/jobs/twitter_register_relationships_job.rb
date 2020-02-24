@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TwitterRegisterRelationshipsJob < ApplicationJob
-  queue_as :default
+  queue_as :twitter
 
   # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   # layer_count の数だけ、再帰的にデータを取得していく
