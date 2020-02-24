@@ -1,8 +1,6 @@
 :verbose: false
 :pidfile: ./tmp/pids/sidekiq.pid
 :logfile: ./log/sidekiq.log
-:concurrency:  5
+:concurrency:  1
 :queues:
-  - [default, 3]
-  - [twitter, 1]
-  - [important, 1]
+  - default
