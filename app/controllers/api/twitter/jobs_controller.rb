@@ -2,7 +2,10 @@
 
 class Api::Twitter::JobsController < Api::ApplicationController
   def index
-    render json: { queues: Sidekiq::Queue.new }
+    queue_count = Sidekiq::Queue.new.size
+    user_count = TwitterUser.all.count
+    relationship_count = TwitterRelationship.all.count
+    render json: { queues: queue_count, user: user_count, relationship: relationship_count }
   end
 
   def create
