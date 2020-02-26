@@ -30,7 +30,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
     twitter_target_ids.each do |id|      
       TwitterUser.create!(twitter_id: id)
     rescue StandardError
-      slack_client.error('既に登録されたユーザーです。', id, me)
+      logger.error('既に登録されたユーザーです。', id, me)
     end
 
     ActiveRecord::Base.transaction do
