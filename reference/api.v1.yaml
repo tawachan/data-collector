@@ -59,6 +59,26 @@ paths:
               schema:
                 type: object
                 properties: {}
+  /api/images:
+    get:
+      summary: list
+      tags: []
+      responses: {}
+      operationId: get-api-images
+    post:
+      summary: create
+      tags: []
+      responses: {}
+      operationId: post-api-images
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
 components:
   schemas: {}
   securitySchemes: {}

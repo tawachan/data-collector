@@ -7,11 +7,13 @@ Rails.application.routes.draw do
 
   get 'apidoc', to: 'application#apidoc'
 
-  namespace :api do
+  namespace :api, format: 'json' do
     namespace :twitter do
       resources :jobs, only: %i[index create]
       get 'jobs/reset', to: 'jobs#reset'
     end
+
+    resources :images, only: %i[index create]
   end
 
   mount Sidekiq::Web, at: '/sidekiq'

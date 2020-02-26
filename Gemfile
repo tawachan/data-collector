@@ -53,3 +53,8 @@ gem 'redis-namespace'
 
 gem 'slack-incoming-webhooks'
 gem 'twitter'
+
+gem 'aws-sdk-s3', require: false
+gem 'exifr'
+gem 'image_processing', '~> 1.2'
+gem 'timezone_finder'
