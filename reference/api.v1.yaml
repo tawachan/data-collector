@@ -34,7 +34,7 @@ paths:
                   example: '1'
                 with_user_detail:
                   type: boolean
-                  example: 'false'
+                  example: false
         description: ''
     parameters: []
     get:

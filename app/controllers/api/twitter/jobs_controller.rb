@@ -17,7 +17,7 @@ class Api::Twitter::JobsController < Api::ApplicationController
     if with_user_detail
       TwitterRegisterRelationshipsWithUserDataJob.perform_later(screen_name, layer_count)
     else
-      TwitterRegisterRelationshipsDataJob.perform_later(screen_name, layer_count)
+      TwitterRegisterRelationshipsJob.perform_later(screen_name, layer_count)
     end
     render_success_response
   end
