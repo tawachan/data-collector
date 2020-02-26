@@ -13,8 +13,8 @@ class TwitterClient
     end
   end
 
-  def fetch_user(screen_name)
-    @client.user(screen_name)
+  def fetch_user(screen_name_or_id)
+    @client.user(screen_name_or_id)
   end
 
   # 1度に最大5000件

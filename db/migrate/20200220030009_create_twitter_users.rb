@@ -4,12 +4,11 @@ class CreateTwitterUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :twitter_users do |t|
       # 検索に必要
-      t.string :screen_name, require: true, index: true, unique: false # Twitterの仕様上変わることがあるから
-      t.bigint :twitter_id, require: true, index: true, unique: true
-      # 必ず存在する値
-      t.string :name, require: true
-      t.string :registed_at, require: true
+      t.string :screen_name, require: false, index: true, unique: false # Twitterの仕様上変わることがあるから
+      t.bigint :twitter_id, require: false, index: true, unique: true
       # オプショナル
+      t.string :name, require: false
+      t.string :registed_at, require: false
       t.string :location, require: false
       t.string :description, require: false
       t.string :url, require: false

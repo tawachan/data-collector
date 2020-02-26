@@ -32,6 +32,9 @@ paths:
                 layer_count:
                   type: integer
                   example: '1'
+                with_user_detail:
+                  type: boolean
+                  example: 'false'
         description: ''
     parameters: []
     get:
