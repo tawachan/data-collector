@@ -77,7 +77,7 @@ class TwitterRegisterRelationshipsJob < ApplicationJob
     # queue_count = Sidekiq::ScheduledSet.new.size
     time_to_delay = 15 # * (queue_count + 1 / 10).ceil
 
-    # slack_client.error('ジョブが異常終了しました', "#{time_to_delay}分後に再度実行します。（#{e.message}）", me)
+    slack_client.error('ジョブが異常終了しました', "#{time_to_delay}分後に再度実行します。（#{e.message}）", me)
     TwitterRegisterRelationshipsJob.set(wait: time_to_delay * 1.minute).perform_later(twitter_screen_name_or_id, layer_count)
   rescue StandardError => e
     logger.error(e)
