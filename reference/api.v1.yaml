@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: api
+  version: '1.0'
+servers:
+  - url: 'https://tawa-me-api.herokuapp.com'
+  - url: 'http://localhost:3000'
+    description: ''
+paths:
+  /api/twitter/jobs:
+    post:
+      summary: execute job
+      operationId: post-api-twitter-users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                screen_name:
+                  type: string
+                  example: tawachandesu
+                layer_count:
+                  type: integer
+                  example: '1'
+                with_user_detail:
+                  type: boolean
+                  example: false
+        description: ''
+    parameters: []
+    get:
+      summary: fetch jobs data
+      operationId: get-api-twitter-jobs
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      parameters: []
+  /api/twitter/jobs/reset:
+    get:
+      summary: ''
+      operationId: get-api-twitter-jobs-reset
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+components:
+  schemas: {}
+  securitySchemes: {}
