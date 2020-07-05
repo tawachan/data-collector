@@ -32,7 +32,7 @@ class SlackClient
 
     @client.post "【#{Rails.env.production? ? '本番' : '開発'}】Twitter Collector", attachments: [{
       title: title,
-      title_link: 'https://tawa-me-api.herokuapp.com/sidekiq',
+      title_link: "#{Rails.application.credentials[:domain]}/sidekiq",
       author_name: user&.screen_name,
       author_link: user&.url,
       author_icon: user&.profile_image_url,
@@ -45,7 +45,7 @@ class SlackClient
   def error(title, message, user = nil)
     @client.post "【#{Rails.env.production? ? '本番' : '開発'}】Twitter Collector", attachments: [{
       title: title,
-      title_link: 'https://tawa-me-api.herokuapp.com/sidekiq',
+      title_link: "#{Rails.application.credentials[:domain]}/sidekiq",
       author_name: user&.screen_name,
       author_link: user&.url,
       author_icon: user&.profile_image_url,
