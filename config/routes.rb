@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   get 'apidoc', to: 'application#apidoc'
 
-  namespace :api do
+  namespace :api, format: 'json' do
+    resources :tweets
     namespace :twitter do
       resources :jobs, only: %i[index create]
       get 'jobs/reset', to: 'jobs#reset'

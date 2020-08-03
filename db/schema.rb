@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_20_035900) do
+ActiveRecord::Schema.define(version: 2020_08_03_140017) do
+
+  create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.string "text", null: false
+    t.boolean "is_reply", null: false
+    t.bigint "user_id", null: false
+    t.string "user_name", null: false
+    t.string "user_screen_name", null: false
+    t.integer "user_friends_count", default: 0, null: false
+    t.integer "user_followers_count", default: 0, null: false
+    t.string "lang"
+    t.integer "quote_count", default: 0, null: false
+    t.integer "reply_count", default: 0, null: false
+    t.integer "retweet_count", default: 0, null: false
+    t.integer "favorite_count", default: 0, null: false
+    t.string "hashtags"
+    t.string "tweeted_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
+    t.index ["user_screen_name"], name: "index_tweets_on_user_screen_name"
+  end
 
   create_table "twitter_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "followed_id"
