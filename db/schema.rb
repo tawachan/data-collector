@@ -14,8 +14,11 @@ ActiveRecord::Schema.define(version: 2020_08_03_140017) do
 
   create_table "tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "tweet_id", null: false
+    t.bigint "original_tweet_id"
     t.string "text", null: false
     t.boolean "is_reply", null: false
+    t.boolean "is_quote", null: false
+    t.boolean "is_retweet", null: false
     t.bigint "user_id", null: false
     t.string "user_name", null: false
     t.string "user_screen_name", null: false

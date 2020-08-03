@@ -123,6 +123,12 @@ components:
           type: string
         tweeted_at:
           type: string
+        is_quote:
+          type: boolean
+        is_retweet:
+          type: boolean
+        original_tweet_id:
+          type: number
       required:
         - tweet_id
         - text
@@ -139,4 +145,6 @@ components:
         - favorite_count
         - hashtags
         - tweeted_at
+        - is_quote
+        - is_retweet
   securitySchemes: {}
