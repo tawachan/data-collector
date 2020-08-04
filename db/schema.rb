@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_08_03_140017) do
     t.integer "favorite_count", default: 0, null: false
     t.string "hashtags"
     t.string "tweeted_at", null: false
+    t.string "keywords", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tweet_id"], name: "index_tweets_on_tweet_id"

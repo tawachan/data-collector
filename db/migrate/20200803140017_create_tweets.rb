@@ -21,6 +21,7 @@ class CreateTweets < ActiveRecord::Migration[6.0]
       t.integer :favorite_count, null: false, default: 0
       t.string :hashtags, null: true
       t.string :tweeted_at, null: false
+      t.string :keywords, null: false
       t.timestamps
     end
   end

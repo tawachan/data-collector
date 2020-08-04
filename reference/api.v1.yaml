@@ -129,6 +129,8 @@ components:
           type: boolean
         original_tweet_id:
           type: number
+        keywords:
+          type: string
       required:
         - tweet_id
         - text
@@ -147,4 +149,5 @@ components:
         - tweeted_at
         - is_quote
         - is_retweet
+        - keywords
   securitySchemes: {}
