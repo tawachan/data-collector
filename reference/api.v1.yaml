@@ -4,7 +4,7 @@ info:
   version: '1.0'
 servers:
   - url: 'https://tawa-me-api.herokuapp.com'
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:5000'
     description: ''
 paths:
   /api/twitter/jobs:
@@ -50,6 +50,8 @@ paths:
                 type: object
                 properties: {}
       parameters: []
+      tags:
+        - tweet
   /api/twitter/jobs/reset:
     get:
       summary: ''
@@ -62,6 +64,90 @@ paths:
               schema:
                 type: object
                 properties: {}
+      tags:
+        - tweet
+  /api/tweets:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - tweet
+      responses: {}
+      operationId: get-api-tweets
+    post:
+      summary: ''
+      operationId: post-api-tweets
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetData'
+        description: ''
+      tags:
+        - tweet
 components:
-  schemas: {}
+  schemas:
+    TweetData:
+      title: TweetData
+      type: object
+      properties:
+        tweet_id:
+          type: number
+        text:
+          type: string
+        is_reply:
+          type: boolean
+        user_id:
+          type: number
+        user_name:
+          type: string
+        user_screen_name:
+          type: string
+        user_friends_count:
+          type: number
+        user_followers_count:
+          type: number
+        lang:
+          type: string
+        quote_count:
+          type: number
+        reply_count:
+          type: number
+        retweet_count:
+          type: number
+        favorite_count:
+          type: number
+        hashtags:
+          type: string
+        tweeted_at:
+          type: string
+        is_quote:
+          type: boolean
+        is_retweet:
+          type: boolean
+        original_tweet_id:
+          type: number
+        keywords:
+          type: string
+      required:
+        - tweet_id
+        - text
+        - is_reply
+        - user_id
+        - user_name
+        - user_screen_name
+        - user_friends_count
+        - user_followers_count
+        - lang
+        - quote_count
+        - reply_count
+        - retweet_count
+        - favorite_count
+        - hashtags
+        - tweeted_at
+        - is_quote
+        - is_retweet
+        - keywords
   securitySchemes: {}
